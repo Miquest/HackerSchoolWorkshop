@@ -1,7 +1,24 @@
+using API.DTOs;
+using API.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+var mapperConfig = new AutoMapper.MapperConfiguration(mapperConfig =>
+{
+    mapperConfig.CreateMap<User, UserDTO>().ReverseMap();
+    mapperConfig.CreateMap<Message, MessageDTO>().ReverseMap();
+});
+
+builder.Services.AddSingleton(mapperConfig.CreateMapper());
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 
@@ -16,9 +33,13 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseRouting();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-app.UseAuthorization();
+app.UseRouting();
 
 app.MapControllerRoute(
     name: "default",
