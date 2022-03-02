@@ -22,6 +22,12 @@ public class UserController : Controller
         return _userLogic.Create(name);
     }
 
+    [HttpGet("CheckUsernameAvailability/{username}")]
+    public bool CheckUsernameAvailability(string username)
+    {
+        return _userLogic.CheckUsernameAvailability(username);
+    }
+
     [HttpGet("Users")]
     public List<UserDTO> GetUsers()
     {

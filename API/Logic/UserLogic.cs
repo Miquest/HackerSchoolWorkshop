@@ -25,6 +25,17 @@ public class UserLogic
         return userDTO;
     }
 
+    public bool CheckUsernameAvailability(string username)
+    {
+        return !CheckIfUserWithNameExists(username);
+    }
+
+    public List<UserDTO> GetUsers()
+    {
+        List<UserDTO> userDTOs = _mapper.Map<List<UserDTO>>(Storage.Users);
+        return userDTOs;
+    }
+
     private bool CheckIfUserWithNameExists(string name)
     {
         if (Storage.Users.Find(user => user.Name.Equals(name)) != null)
@@ -42,11 +53,5 @@ public class UserLogic
         };
         Storage.Users.Add(user);
         return user;
-    }
-
-    public List<UserDTO> GetUsers()
-    {
-        List<UserDTO> userDTOs = _mapper.Map<List<UserDTO>>(Storage.Users);
-        return userDTOs;
     }
 }
