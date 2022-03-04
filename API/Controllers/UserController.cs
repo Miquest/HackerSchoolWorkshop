@@ -16,16 +16,17 @@ public class UserController : Controller
         _userLogic = new UserLogic(mapper);
     }
 
-    [HttpPost("Create")]
-    public UserDTO Create([FromBody] string name)
-    {
-        return _userLogic.Create(name);
-    }
-
     [HttpGet("CheckUsernameAvailability/{username}")]
     public bool CheckUsernameAvailability(string username)
     {
         return _userLogic.CheckUsernameAvailability(username);
+    }
+
+    [HttpPost("Create")]
+    public UserDTO Create([FromBody] string name)
+    {
+        Console.WriteLine(name);
+        return _userLogic.Create(name);
     }
 
     [HttpGet("Users")]

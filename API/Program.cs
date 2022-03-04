@@ -30,7 +30,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 if (app.Environment.IsDevelopment())
@@ -46,6 +45,7 @@ app.UseCors(x => x
     .AllowAnyHeader()
     .SetIsOriginAllowed(origin => true)
     .AllowCredentials());
+
 
 app.MapControllerRoute(
     name: "default",

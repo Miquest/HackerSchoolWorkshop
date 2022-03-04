@@ -12,17 +12,17 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   checkIfUsernameIsFree(name: string) : Observable<HttpResponse<boolean>> {
-    const url = `${environment.url}/CheckUsernameAvailability/${name}`;
+    const url = `${environment.url}/User/CheckUsernameAvailability/${name}`;
     return this.httpClient.get<boolean>(url, {observe: 'response'});
   }
 
   createUser(name: string) : Observable<User> {
-    const url = `${environment.url}/Create/${name}`;
-    return this.httpClient.post<User>(url, {observe: 'response'});
+    const url = `${environment.url}/User/Create`;
+    return this.httpClient.post<User>(url, name);
   }
 
   getUsers() : Observable<HttpResponse<User[]>> {
-    const url = `${environment.url}/Users`;
+    const url = `${environment.url}/User/Users`;
     return this.httpClient.get<User[]>(url, {observe: 'response'});
   }
 }
