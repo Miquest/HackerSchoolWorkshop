@@ -4,6 +4,7 @@ import {FormControl} from "@angular/forms";
 import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
 import {map, Observable, startWith} from "rxjs";
+import {Chat} from "../../models/chat";
 
 @Component({
   selector: 'app-window',
@@ -15,6 +16,23 @@ export class WindowComponent implements OnInit {
   userControl = new FormControl();
   users: User[] = [];
   filteredUsers: Observable<User[]> | undefined;
+
+  chats: Chat[] = [
+    {
+      id: "1",
+      users: [
+        {id: "asd", name: "test1"},
+        {id: "asd2", name: "test2"},
+      ]
+    },
+    {
+      id: "2",
+      users: [
+        {id: "asd", name: "test1"},
+        {id: "asd2", name: "test2"},
+      ]
+    }
+  ];
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -48,5 +66,9 @@ export class WindowComponent implements OnInit {
   _filter(value: string): User[] {
     const filterValue = value.toLowerCase();
     return this.users.filter(user => user.name.toLowerCase().includes(filterValue));
+  }
+
+  openChat($chatId: string) {
+    console.log($chatId);
   }
 }
