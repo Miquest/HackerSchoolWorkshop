@@ -13,14 +13,7 @@ builder.Services.AddSingleton(mapperConfig.CreateMapper());
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: "Chat",
-                      builder =>
-                      {
-                          builder.WithOrigins("http://localhost");
-                      });
-});
+builder.Services.AddCors();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -48,7 +41,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 
-app.UseCors("Chat");
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true)
+    .AllowCredentials());
 
 app.MapControllerRoute(
     name: "default",
