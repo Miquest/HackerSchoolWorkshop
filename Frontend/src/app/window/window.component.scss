@@ -18,3 +18,17 @@ mat-card{
   min-height: 150px;
   background-color: red;
 }
+
+.container {
+  display: grid;
+  grid-template-areas:
+    'list chat chat';
+}
+
+.list {
+  grid-area: list;
+}
+
+.chat {
+  grid-area: chat;
+}
