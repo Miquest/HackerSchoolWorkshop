@@ -67,4 +67,8 @@ export class WindowComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.users.filter(user => user.name.toLowerCase().includes(filterValue));
   }
+
+  openChat($event: string) {
+    console.log($event);
+  }
 }

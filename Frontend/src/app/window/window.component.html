@@ -2,7 +2,7 @@
   <mat-card-title><h3>Willkommen, {{ username }}.</h3></mat-card-title>
 
   <mat-card-content class="container">
-    <app-list class="list" [chats]="chats"></app-list>
+    <app-list class="list" [chats]="chats" (openChat)="openChat($event)"></app-list>
     <app-chat class="chat"></app-chat>
   </mat-card-content>
 

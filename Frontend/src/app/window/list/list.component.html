@@ -1,6 +1,6 @@
 <mat-list>
   <ng-container *ngFor="let chat of chats">
-    <mat-list-item>
+    <mat-list-item (click)="open(chat.id)">
       <ng-container *ngFor="let user of chat.users">
         {{ user.name }}
       </ng-container>
