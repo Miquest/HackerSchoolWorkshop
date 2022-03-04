@@ -11,8 +11,5 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    console.log(this.userService.checkIfUsernameIsFree('test').subscribe(x => console.log(x)));
-    console.log(this.userService.createUser('test').subscribe());
   }
-
 }

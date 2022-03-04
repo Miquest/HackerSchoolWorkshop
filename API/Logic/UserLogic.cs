@@ -13,14 +13,14 @@ public class UserLogic
         _mapper = mapper;
     }
 
-    public UserDTO Create(string name)
+    public UserDTO Create(NewUserDTO newUser)
     {
-        if (CheckIfUserWithNameExists(name)) 
+        if (CheckIfUserWithNameExists(newUser.Name)) 
         {
             return null;
         }
 
-        User user = CreateUser(name);
+        User user = CreateUser(newUser.Name);
         UserDTO userDTO = _mapper.Map<UserDTO>(user);
         return userDTO;
     }

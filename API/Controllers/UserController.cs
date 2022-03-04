@@ -23,10 +23,9 @@ public class UserController : Controller
     }
 
     [HttpPost("Create")]
-    public UserDTO Create([FromBody] string name)
+    public UserDTO Create([FromBody] NewUserDTO newUser)
     {
-        Console.WriteLine(name);
-        return _userLogic.Create(name);
+        return _userLogic.Create(newUser);
     }
 
     [HttpGet("Users")]
