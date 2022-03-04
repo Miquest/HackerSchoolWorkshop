@@ -43,8 +43,7 @@ export class LoginComponent implements OnInit {
   }
 
   saveUserInLocalStorage(user: User) : void {
-    localStorage.setItem("user_id", user.id);
-    localStorage.setItem("user_name", user.name);
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   redirectToChat() : void {
