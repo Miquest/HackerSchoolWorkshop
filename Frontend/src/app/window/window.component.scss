@@ -2,7 +2,7 @@
 
 }
 mat-card{
-  width: 15%;
+  width: 50%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
@@ -12,4 +12,9 @@ mat-card{
 }
 .btn-full-width{
   width: 100%;
+}
+.chat-container{
+  min-width: 300px;
+  min-height: 150px;
+  background-color: red;
 }
