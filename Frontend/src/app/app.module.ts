@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
-import { ChatComponent } from './chat/chat.component';
 import {MatCardModule} from "@angular/material/card";
 import {HttpClientModule} from "@angular/common/http";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -14,13 +13,16 @@ import {MatButtonModule} from "@angular/material/button";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import { ListComponent } from './chat/list/list.component';
 import {MatListModule} from "@angular/material/list";
+import {ChatComponent} from "./window/chat/chat.component";
+import {ListComponent} from "./window/list/list.component";
+import {WindowComponent} from "./window/window.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    WindowComponent,
     ChatComponent,
     ListComponent
   ],
