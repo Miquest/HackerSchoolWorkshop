@@ -20,7 +20,7 @@ export class UserService {
 
   createUser(name: string) : Observable<User> {
     const url = `${environment.url}${this.endpoint}/Create`;
-    return this.httpClient.post<User>(url, name);
+    return this.httpClient.post<User>(url, { 'name': name });
   }
 
   getUsers() : Observable<HttpResponse<User[]>> {
