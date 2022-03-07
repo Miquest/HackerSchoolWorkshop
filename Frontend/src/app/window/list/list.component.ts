@@ -15,6 +15,11 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getUserNamesFromChat(chatId: string) : string {
+    return this.chats?.filter(chat => chat.id === chatId)
+      .map(chat => chat.users.map(user => user.name)).join(", ") as string;
+  }
+
   open(chatId: string) : void {
     this.openChat.emit(chatId);
   }

@@ -16,6 +16,7 @@ export class WindowComponent implements OnInit {
   userControl = new FormControl();
   users: User[] = [];
   filteredUsers: Observable<User[]> | undefined;
+  openedChat: Chat | undefined;
 
   chats: Chat[] = [
     {
@@ -28,8 +29,8 @@ export class WindowComponent implements OnInit {
     {
       id: "2",
       users: [
-        {id: "asd", name: "test1"},
-        {id: "asd2", name: "test2"},
+        {id: "asd", name: "test3"},
+        {id: "asd2", name: "test4"},
       ]
     }
   ];
@@ -69,6 +70,6 @@ export class WindowComponent implements OnInit {
   }
 
   openChat($chatId: string) {
-    console.log($chatId);
+    this.openedChat = this.chats.find(chat => chat.id === $chatId);
   }
 }

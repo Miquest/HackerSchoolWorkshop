@@ -3,31 +3,6 @@
 
   <mat-card-content class="container">
     <app-list class="list" [chats]="chats" (openChat)="openChat($event)"></app-list>
-    <app-chat class="chat"></app-chat>
+    <app-chat class="chat" [chat]="openedChat"></app-chat>
   </mat-card-content>
-
-<!--  <mat-card-actions>-->
-<!--    <mat-form-field class="full-width" appearance="fill">-->
-<!--      <mat-label>Nachricht</mat-label>-->
-<!--      <input matInput placeholder=".." value="">-->
-<!--    </mat-form-field>-->
-
-<!--    <form class="example-form">-->
-<!--      <mat-form-field class="full-width" appearance="fill">-->
-<!--        <mat-label>Name</mat-label>-->
-<!--        <input type="text"-->
-<!--               placeholder="Name"-->
-<!--               matInput-->
-<!--               [formControl]="userControl"-->
-<!--               [matAutocomplete]="auto">-->
-<!--        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">-->
-<!--          <mat-option *ngFor="let filteredUser of filteredUsers | async" [value]="filteredUser.name">-->
-<!--            {{filteredUser.name}}-->
-<!--          </mat-option>-->
-<!--        </mat-autocomplete>-->
-<!--      </mat-form-field>-->
-<!--    </form>-->
-
-<!--    <button mat-flat-button class="btn-full-width" color="primary">Send</button>-->
-<!--  </mat-card-actions>-->
 </mat-card>
