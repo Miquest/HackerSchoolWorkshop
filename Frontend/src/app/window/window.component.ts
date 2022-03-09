@@ -79,20 +79,19 @@ export class WindowComponent implements OnInit {
   b: string | undefined;
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(ChatDialogComponent, {
-      width: '250px',
-      data: [
-              {id: "asd", name: "test1"},
-              {id: "asd2", name: "test2"},
-            ]
-    });
+    this.userService.getUsers().subscribe((resp) => {
+      const dialogRef = this.dialog.open(ChatDialogComponent, {
+        width: '250px',
+        data: resp.body
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      let chat: Chat = {
-        id: Guid.create().toString(),
-        users: result
-      }
-      this.chats.push(chat)
+      dialogRef.afterClosed().subscribe(result => {
+        let chat: Chat = {
+          id: Guid.create().toString(),
+          users: result
+        }
+        this.chats.push(chat)
+      });
     });
   }
 }
