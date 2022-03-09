@@ -21,22 +21,7 @@ export class WindowComponent implements OnInit {
   filteredUsers: Observable<User[]> | undefined;
   openedChat: Chat | undefined;
 
-  chats: Chat[] = [
-    {
-      id: "1",
-      users: [
-        {id: "asd", name: "test1"},
-        {id: "asd2", name: "test2"},
-      ]
-    },
-    {
-      id: "2",
-      users: [
-        {id: "asd", name: "test3"},
-        {id: "asd2", name: "test4"},
-      ]
-    }
-  ];
+  chats: Chat[] = [];
 
   constructor(private userService: UserService, private router: Router, public dialog: MatDialog) { }
 
@@ -76,21 +61,24 @@ export class WindowComponent implements OnInit {
     this.openedChat = this.chats.find(chat => chat.id === $chatId);
   }
 
-  b: string | undefined;
-
   openDialog(): void {
-    this.userService.getUsers().subscribe((resp) => {
+    let getUsers = this.userService.getUsers().subscribe((resp) => {
       const dialogRef = this.dialog.open(ChatDialogComponent, {
         width: '250px',
         data: resp.body
       });
 
-      dialogRef.afterClosed().subscribe(result => {
-        let chat: Chat = {
-          id: Guid.create().toString(),
-          users: result
+      let getUsersFromDialog = dialogRef.afterClosed().subscribe(result => {
+        if (result !== undefined) {
+          let chat: Chat = {
+            id: Guid.create().toString(),
+            users: result
+          }
+          this.chats.push(chat);
+          this.openChat(chat.id);
         }
-        this.chats.push(chat)
+        getUsers.unsubscribe();
+        getUsersFromDialog.unsubscribe();
       });
     });
   }

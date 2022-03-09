@@ -17,7 +17,7 @@ export class ListComponent implements OnInit {
 
   getUserNamesFromChat(chatId: string) : string {
     return this.chats?.filter(chat => chat.id === chatId)
-      .map(chat => chat.users.map(user => user.name)).join(", ") as string;
+      .map(chat => chat.users?.map(user => user.name)).join(", ") as string;
   }
 
   open(chatId: string) : void {
