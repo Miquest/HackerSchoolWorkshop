@@ -7,6 +7,7 @@ import {map, Observable, startWith} from "rxjs";
 import {Chat} from "../../models/chat";
 import {MatDialog} from "@angular/material/dialog";
 import {ChatDialogComponent} from "./chat-dialog/chat-dialog.component";
+import {Guid} from "guid-typescript";
 
 @Component({
   selector: 'app-window',
@@ -87,8 +88,11 @@ export class WindowComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.b = result;
-      console.log(result);
+      let chat: Chat = {
+        id: Guid.create().toString(),
+        users: result
+      }
+      this.chats.push(chat)
     });
   }
 }
