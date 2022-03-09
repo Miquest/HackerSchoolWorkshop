@@ -17,6 +17,10 @@ import {MatListModule} from "@angular/material/list";
 import {ChatComponent} from "./window/chat/chat.component";
 import {ListComponent} from "./window/list/list.component";
 import {WindowComponent} from "./window/window.component";
+import { ChatDialogComponent } from './window/chat-dialog/chat-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -24,7 +28,8 @@ import {WindowComponent} from "./window/window.component";
     LoginComponent,
     WindowComponent,
     ChatComponent,
-    ListComponent
+    ListComponent,
+    ChatDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +44,10 @@ import {WindowComponent} from "./window/window.component";
     MatSelectModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule,
+    MatChipsModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

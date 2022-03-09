@@ -1,0 +1,32 @@
+<div mat-dialog-content>
+  <p>Create new Chat</p>
+
+  <mat-form-field class="example-chip-list" appearance="fill">
+    <mat-label>Usernames to chat</mat-label>
+    <mat-chip-list #chipList aria-label="Usernames selection">
+      <mat-chip *ngFor="let user of selectedUsers" (removed)="remove(user)">
+        {{user.name}}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+      <input
+        placeholder="Usernames"
+        [formControl]="userControl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let user of filteredUsers | async" [value]="user.name">
+        {{user.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="selectedUsers" cdkFocusInitial>Ok</button>
+</div>

@@ -5,6 +5,8 @@ import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
 import {map, Observable, startWith} from "rxjs";
 import {Chat} from "../../models/chat";
+import {MatDialog} from "@angular/material/dialog";
+import {ChatDialogComponent} from "./chat-dialog/chat-dialog.component";
 
 @Component({
   selector: 'app-window',
@@ -35,7 +37,7 @@ export class WindowComponent implements OnInit {
     }
   ];
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.checkIfUserIsLoggedInElseRedirect();
@@ -71,5 +73,22 @@ export class WindowComponent implements OnInit {
 
   openChat($chatId: string) {
     this.openedChat = this.chats.find(chat => chat.id === $chatId);
+  }
+
+  b: string | undefined;
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ChatDialogComponent, {
+      width: '250px',
+      data: [
+              {id: "asd", name: "test1"},
+              {id: "asd2", name: "test2"},
+            ]
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.b = result;
+      console.log(result);
+    });
   }
 }
