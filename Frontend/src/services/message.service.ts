@@ -22,8 +22,8 @@ export class MessageService {
     return this.httpClient.post(url, JSON.stringify(message), this.httpOptions);
   }
 
-  receiveMessages(id: string) : Observable<HttpResponse<Message>> {
+  receiveMessages(id: string) : Observable<HttpResponse<Message[]>> {
     const url = `${environment.url}${this.endpoint}/ReceiveMessages/${id}`;
-    return this.httpClient.get<Message>(url, {observe: 'response'});
+    return this.httpClient.get<Message[]>(url, {observe: 'response'});
   }
 }

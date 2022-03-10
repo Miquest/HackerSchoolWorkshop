@@ -14,7 +14,9 @@
       </label>
     </mat-card-title>
     <mat-card-content>
-
+      <ng-container *ngFor="let message of chat?.messages">
+        <p>{{ message.text }}</p>
+      </ng-container>
     </mat-card-content>
     <mat-card-actions>
       <mat-form-field class="input-form input-full-width" appearance="fill">
