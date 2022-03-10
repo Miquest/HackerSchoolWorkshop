@@ -19,9 +19,9 @@
     <mat-card-actions>
       <mat-form-field class="input-form input-full-width" appearance="fill">
         <mat-label>Nachricht</mat-label>
-        <input matInput placeholder="Schreibe eine Nachricht" value="">
+        <input matInput placeholder="Schreibe eine Nachricht" [(ngModel)]="text">
       </mat-form-field>
-      <button mat-button (click)="sendMessage('hello')">Send</button>
+      <button mat-button (click)="sendMessage(text)">Send</button>
     </mat-card-actions>
   </ng-template>
 </mat-card>

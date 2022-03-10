@@ -3,6 +3,7 @@ import {Chat} from "../../../models/chat";
 import {MessageService} from "../../../services/message.service";
 import {Message} from "../../../models/message";
 import {User} from "../../../models/user";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-chat',
@@ -11,6 +12,7 @@ import {User} from "../../../models/user";
 })
 export class ChatComponent implements OnInit {
   @Input() chat: Chat | undefined;
+  text!: string;
 
   constructor(private messageService: MessageService) { }
 
@@ -23,16 +25,19 @@ export class ChatComponent implements OnInit {
 
   sendMessage(text: string) {
     const id: string = (JSON.parse(localStorage.getItem('user') ?? '') as User).id
+    const message: Message = this.createMessage(text, id);
+    this.messageService.sendMessage(message)
+      .pipe(first())
+      .subscribe();
+  }
 
-    let message: Message = {
+  createMessage(text: string, id: string) : Message {
+    return {
       text: text,
       senderId: id,
-      receiverId: [
-        id
-      ],
+      receiverId: this.chat?.users.map(user => user.id) as [],
       toAllUsers: false,
-      timestamp: "0"
-    }
-    this.messageService.sendMessage(message).subscribe();
+      timestamp: "2022-03-10T13:04:10.481Z"
+    } as Message;
   }
 }
