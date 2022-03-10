@@ -61,7 +61,7 @@ export class WindowComponent implements OnInit {
     this.openedChat = this.chats.find(chat => chat.id === $chatId);
   }
 
-  openDialog(): void {
+  createNewChat(): void {
     let getUsers = this.userService.getUsers().subscribe((resp) => {
       const dialogRef = this.dialog.open(ChatDialogComponent, {
         width: '250px',
