@@ -18,12 +18,12 @@
         <p>{{ message.text }}</p>
       </ng-container>
     </mat-card-content>
-    <mat-card-actions>
-      <mat-form-field class="input-form input-full-width" appearance="fill">
+    <mat-card-actions class="message-grid">
+      <mat-form-field class="input-form input-full-width input-message" appearance="fill">
         <mat-label>Nachricht</mat-label>
-        <input matInput placeholder="Schreibe eine Nachricht" [(ngModel)]="text">
+        <input matInput placeholder="Schreibe eine Nachricht" (keydown.enter)="onKeyDown()" [(ngModel)]="text">
       </mat-form-field>
-      <button mat-button (click)="sendMessage(text)">Send</button>
+      <button mat-button (click)="sendMessage(text)" class="send-message">Send</button>
     </mat-card-actions>
   </ng-template>
 </mat-card>

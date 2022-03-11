@@ -30,4 +30,17 @@ mat-card-actions{
   width: 100%;
 }
 
+.message-grid {
+  display: grid;
+  grid-template-areas:
+    'input-message input-message send-message'
+}
+
+.message-grid .input-message {
+  grid-area: input-message;
+}
+
+.message-grid .send-message {
+  grid-area: send-message;
+}
 

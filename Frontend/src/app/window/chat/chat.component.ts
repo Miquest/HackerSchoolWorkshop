@@ -29,6 +29,7 @@ export class ChatComponent implements OnInit {
     this.messageService.sendMessage(message)
       .pipe(first())
       .subscribe();
+    this.text = "";
   }
 
   createMessage(text: string, id: string) : Message {
@@ -39,5 +40,9 @@ export class ChatComponent implements OnInit {
       toAllUsers: false,
       timestamp: "2022-03-10T13:04:10.481Z"
     } as Message;
+  }
+
+  onKeyDown(): void {
+    this.sendMessage(this.text);
   }
 }
