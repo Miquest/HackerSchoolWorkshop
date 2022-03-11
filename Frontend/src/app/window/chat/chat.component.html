@@ -14,8 +14,26 @@
       </label>
     </mat-card-title>
     <mat-card-content>
-      <ng-container *ngFor="let message of chat?.messages">
-        <p>{{ message.text }}</p>
+      <ng-container *ngFor="let message of chat?.messages?.reverse()">
+
+        <ng-container
+          *ngIf="message.senderId == getOwnUser().id; then sendText; else receivedText">
+        </ng-container>
+          <ng-template #sendText>
+            <div class="text-container send-text-container">
+              <p>{{ message.text}}</p>
+            </div>
+          </ng-template>
+
+          <ng-template #receivedText>
+            <div class="text-container received-text-container">
+              <p class="text-send-from">Gesendet von {{getUserById(message.senderId).name}}</p>
+              <p>{{ message.text}}</p>
+            </div>
+          </ng-template>
+
+
+
       </ng-container>
     </mat-card-content>
     <mat-card-actions class="message-grid">

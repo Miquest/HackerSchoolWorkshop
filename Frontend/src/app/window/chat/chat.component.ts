@@ -61,4 +61,10 @@ export class ChatComponent implements OnInit {
   onKeyDown(): void {
     this.sendMessage(this.text);
   }
+  getOwnUser() : User {
+    return (JSON.parse(localStorage.getItem("user") ?? '') as User);
+  }
+  getUserById(id: string) : User {
+    return this.chat?.users?.find(x => x.id === id) as User;
+  }
 }

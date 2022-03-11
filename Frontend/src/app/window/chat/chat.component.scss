@@ -15,10 +15,14 @@ mat-card-title{
 }
 
 mat-card-content{
+  display: flex;
   width: 100%;
   height: 500px;
   background-color: rgba(0,0,0,0.1);
   margin: 0;
+  overflow-y: scroll;
+  flex-direction: column-reverse;
+  padding: 5px 10px;
 }
 
 mat-card-actions{
@@ -42,5 +46,27 @@ mat-card-actions{
 
 .message-grid .send-message {
   grid-area: send-message;
+}
+.send-text-container{
+  position: relative;
+  left: 50%;
+  background-color: #B81F40;
+}
+.text-send-from{
+  font-size: 12px;
+  opacity: 0.5;
+}
+.received-text-container{
+  background-color: rgba(255,255,255, 0.1);
+}
+.text-container{
+  width: calc(50% - 20px);
+  word-break: break-word;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px 0;
+}
+.text-container p{
+  margin: 0;
 }
 
