@@ -31,6 +31,7 @@ export class WindowComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.checkIfUserIsLoggedInElseRedirect();
     this.loadUsers();
+    this.chats = this.loadChatsFromLocalStorage();
 
     this.filteredUsers = this.userControl.valueChanges.pipe(
       startWith(''),
@@ -59,6 +60,7 @@ export class WindowComponent implements OnInit, OnDestroy {
       const messages: Message[] = resp.body as Message[];
       messages.forEach(message => {
         this.readMessageAndTranslate(message);
+        this.saveMessageToChatsInLocalStorage(message);
       });
     });
   }
@@ -72,6 +74,11 @@ export class WindowComponent implements OnInit, OnDestroy {
     }else {
       chat.messages.push(message);
     }
+  }
+
+  saveMessageToChatsInLocalStorage(message: Message): void {
+    this.chats.find(chat => chat.id == this.user?.id)?.messages.push(message);
+    localStorage.setItem('chats', JSON.stringify(this.chats));
   }
 
   createUserGroupFromMessage(message: Message): string[] {
@@ -122,10 +129,6 @@ export class WindowComponent implements OnInit, OnDestroy {
     return this.users.filter(user => user.name.toLowerCase().includes(filterValue));
   }
 
-  openChat($chatId: string) {
-    this.openedChat = this.chats.find(chat => chat.id === $chatId);
-  }
-
   createNewChat(): void {
     let getUsers = this.userService.getUsers().subscribe((resp) => {
       const dialogRef = this.dialog.open(ChatDialogComponent, {
@@ -142,10 +145,35 @@ export class WindowComponent implements OnInit, OnDestroy {
           }
           this.chats.push(chat);
           this.openChat(chat.id);
+          this.saveChatToLocalStorage(chat);
         }
         getUsers.unsubscribe();
         getUsersFromDialog.unsubscribe();
       });
     });
+  }
+
+  saveChatToLocalStorage(chat: Chat): void {
+    let chats: Chat[] = this.loadChatsFromLocalStorage();
+    chats.push(chat);
+    this.saveNewChatToLocalStorage(chats);
+  }
+
+  loadChatsFromLocalStorage(): Chat[] {
+    const chat: string | undefined = localStorage.getItem('chats') ?? undefined;
+    if (chat !== undefined) {
+      return JSON.parse(chat);
+    }
+    const newChat: string = JSON.stringify([]);
+    localStorage.setItem('chats', newChat);
+    return [];
+  }
+
+  saveNewChatToLocalStorage(chats: Chat[]): void {
+    localStorage.setItem('chats', JSON.stringify(chats));
+  }
+
+  openChat($chatId: string): void {
+    this.openedChat = this.chats.find(chat => chat.id === $chatId);
   }
 }

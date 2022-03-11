@@ -19,20 +19,36 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getUserNamesFromChat() : string {
+  getUserNamesFromChat(): string {
     return this.chat?.users.map(user => user.name).join(", ") as string;
   }
 
-  sendMessage(text: string) {
+  sendMessage(text: string): void {
     const id: string = (JSON.parse(localStorage.getItem('user') ?? '') as User).id
     const message: Message = this.createMessage(text, id);
     this.messageService.sendMessage(message)
       .pipe(first())
       .subscribe();
     this.text = "";
+    this.saveMessage(message);
   }
 
-  createMessage(text: string, id: string) : Message {
+  saveMessage(message: Message): void {
+    this.chat?.messages.push(message);
+    this.saveMessageToChatsInLocalStorage(message);
+  }
+
+  saveMessageToChatsInLocalStorage(message: Message): void {
+    const chats: Chat[] = this.loadChats();
+    chats.find(chat => chat.id == this.chat?.id)?.messages.push(message);
+    localStorage.setItem('chats', JSON.stringify(chats));
+  }
+
+  loadChats(): Chat[] {
+    return JSON.parse(localStorage.getItem("chats") ?? '') as Chat[];
+  }
+
+  createMessage(text: string, id: string): Message {
     return {
       text: text,
       senderId: id,
