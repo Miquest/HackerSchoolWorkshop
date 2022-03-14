@@ -9,7 +9,7 @@ interface Environment {
 
 export const environment : Environment = {
   production: false,
-  url: "http://localhost:5166/api"
+  url: "https://hacker-school.azurewebsites.net/api"
 };
 
 /*
