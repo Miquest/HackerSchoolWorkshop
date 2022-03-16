@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../environments/environment";
-import {Message} from "../models/message";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
 
-  endpoint: string = "/Message";
+  url: string = environment.url + "/Message";
 
   httpOptions: any = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -17,13 +16,19 @@ export class MessageService {
 
   constructor(private httpClient: HttpClient) { }
 
-  sendMessage(message: Message) : Observable<any> {
-    const url = `${environment.url}${this.endpoint}/SendMessage`;
-    return this.httpClient.post(url, JSON.stringify(message), this.httpOptions);
+  sendMessage(message: Object) : Observable<any> {
+    /*
+    *   Sende die Nachricht zum Backend
+    *   (Endpunkt '/SendMessage')
+    * */
+    throw new Error('Method not implemented.');
   }
 
-  receiveMessages(id: string) : Observable<HttpResponse<Message[]>> {
-    const url = `${environment.url}${this.endpoint}/ReceiveMessages/${id}`;
-    return this.httpClient.get<Message[]>(url, {observe: 'response'});
+  receiveMessages(id: string) : Observable<HttpResponse<Object[]>>  /* soll eine Message Liste zurückgeben */ {
+    /*
+    *   Empfange mithilfe deiner ID Nachrichten vom Backend
+    *   (Endpunkt '/ReceiveMessages/<deine ID>')
+    * */
+    throw new Error('Method not implemented.');
   }
 }

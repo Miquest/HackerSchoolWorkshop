@@ -1,7 +1,11 @@
 <mat-list>
-  <ng-container *ngFor="let chat of chats">
-    <mat-list-item class="openChat" (click)="open(chat.id)">
-      {{ getUserNamesFromChat(chat.id) }}
+  <!--
+    Hier sollen all deine Chats angezeigt werden.
+    Verwende dazu eine Schleife
+  -->
+  <ng-container *ngIf="chats !== undefined && chats[0] !== undefined">
+    <mat-list-item class="openChat" (click)="open(chats[0].id)">
+      {{ getUserNamesFromChat(chats[0].id) }}
     </mat-list-item>
   </ng-container>
 </mat-list>

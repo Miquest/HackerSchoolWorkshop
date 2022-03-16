@@ -110,9 +110,14 @@ export class WindowComponent implements OnInit, OnDestroy {
   getUsersById(userIds: string[]): User[] {
     let users: User[] = [];
     userIds.forEach(userId => {
-      let user: User | undefined = this.users.find(user => user.id === userId);
+      /*
+      *   Suche mithilfe der User Id das Objekt vom User und speichere dieses in der Variablen "user"
+      * */
+      const user: User | undefined = undefined;
       if (user !== undefined) {
-        users.push(user);
+        /*
+        *   Füge der Liste 'users' die Variable 'user' hinzu
+        * */
       }
     });
     return users;
@@ -155,12 +160,17 @@ export class WindowComponent implements OnInit, OnDestroy {
 
   saveChatToLocalStorage(chat: Chat): void {
     let chats: Chat[] = this.loadChatsFromLocalStorage();
-    chats.push(chat);
+    /*
+    *   Füge den Chat zu der Chatliste hinzu um diese im anschluss im lokalen Speicher deines Browsers zu speichern
+    * */
     this.saveNewChatToLocalStorage(chats);
   }
 
   loadChatsFromLocalStorage(): Chat[] {
-    const chat: string | undefined = localStorage.getItem('chats') ?? undefined;
+    /*
+    *   Lade aus dem lokalen Storage von deinem Browser die Chats. Der Key heißt 'chats'
+    * */
+    const chat: string | undefined = undefined;
     if (chat !== undefined) {
       return JSON.parse(chat);
     }
@@ -170,7 +180,9 @@ export class WindowComponent implements OnInit, OnDestroy {
   }
 
   saveNewChatToLocalStorage(chats: Chat[]): void {
-    localStorage.setItem('chats', JSON.stringify(chats));
+    /*
+    *   Speichere die Chats im lokalen Browser speicher und nenne den Key 'chats'
+    * */
   }
 
   openChat($chatId: string): void {
