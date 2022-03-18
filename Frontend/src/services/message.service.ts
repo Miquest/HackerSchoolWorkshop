@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../environments/environment";
+import {Message} from "../models/message";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class MessageService {
 
   constructor(private httpClient: HttpClient) { }
 
-  sendMessage(message: Object) : Observable<any> {
+  sendMessage(message: Message) : Observable<Message> {
     /*
     *   Sende die Nachricht zum Backend
     *   (Endpunkt '/SendMessage')
@@ -24,7 +25,7 @@ export class MessageService {
     throw new Error('Method not implemented.');
   }
 
-  receiveMessages(id: string) : Observable<HttpResponse<Object[]>>  /* soll eine Message Liste zurückgeben */ {
+  receiveMessages(id: string) : Observable<HttpResponse<Message[]>>  /* soll eine Message Liste zurückgeben */ {
     /*
     *   Empfange mithilfe deiner ID Nachrichten vom Backend
     *   (Endpunkt '/ReceiveMessages/<deine ID>')
