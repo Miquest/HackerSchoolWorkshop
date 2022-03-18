@@ -27,7 +27,7 @@
 
           <ng-template #receivedText>
             <div class="text-container received-text-container">
-              <p class="text-send-from">Gesendet von {{getUserById(message.senderId).name}}</p>
+              <p class="text-send-from">Gesendet von {{getUserById(message.senderId)?.name}}</p>
               <p>{{ message.text}}</p>
             </div>
           </ng-template>
